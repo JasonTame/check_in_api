@@ -6,6 +6,7 @@ use App\Observers\CheckInObserver;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class CheckIn extends Model
 {
@@ -14,7 +15,17 @@ class CheckIn extends Model
     protected $guarded = ['id'];
 
     /**
-     * The user that this check in belongs to
+     * Get the reminder linked to this Check In
+     *
+     * @return HasOne
+     */
+    public function reminder(): HasOne
+    {
+        return $this->hasOne(Reminder::class);
+    }
+
+    /**
+     * Get the user that this check in belongs to
      *
      * @return BelongsTo
      */

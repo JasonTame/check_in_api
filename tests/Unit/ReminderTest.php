@@ -35,6 +35,7 @@ it('can be created with a related CheckIn', function () {
             'interval' => 'monthly'
         ]
     );
+    assertEquals($checkIn->id, $reminder->checkIn->id);
 });
 
 it('creates a checkin date based on the chosen interval', function () {

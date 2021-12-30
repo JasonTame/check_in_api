@@ -9,6 +9,7 @@ use App\Models\User;
 
 use function Pest\Faker\faker;
 use function Pest\Laravel\assertDatabaseHas;
+use function PHPUnit\Framework\assertEquals;
 
 beforeEach(function () {
     $this->checkIn = CheckIn::factory()
@@ -68,4 +69,5 @@ it('creates a checkin reminder when created', function () {
         ->create();
 
     assertDatabaseHas('reminders', ['check_in_id' => $checkIn->id]);
+    assertEquals($checkIn->id, $checkIn->reminder->check_in_id);
 });
