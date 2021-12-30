@@ -15,12 +15,12 @@ class CreateRemindersTable extends Migration
     {
         Schema::create('reminders', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('checkin_id');
+            $table->unsignedBigInteger('check_in_id');
             $table->string('interval')->default('monthly');
             $table->dateTime('checkin_date')->nullable();
             $table->timestamps();
 
-            $table->foreign('checkin_id')->references('id')->on('check_ins');
+            $table->foreign('check_in_id')->references('id')->on('check_ins');
         });
     }
 

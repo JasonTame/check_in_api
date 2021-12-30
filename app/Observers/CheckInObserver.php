@@ -17,7 +17,7 @@ class CheckInObserver
     {
         // Create a related reminder with default values
         $reminder = new Reminder([
-            'checkin_id' => $checkIn->id
+            'check_in_id' => $checkIn->id
         ]);
 
         $reminder->save();

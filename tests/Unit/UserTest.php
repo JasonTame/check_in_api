@@ -15,3 +15,14 @@ it('can have multiple check ins', function () {
 
     assertCount(3, $user->checkIns);
 });
+
+it('can have multiple reminders', function () {
+    $user = User::factory()->create();
+
+    CheckIn::factory()
+        ->count(3)
+        ->for($user)
+        ->create();
+
+    assertCount(3, $user->reminders);
+});

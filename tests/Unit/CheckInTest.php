@@ -67,5 +67,5 @@ it('creates a checkin reminder when created', function () {
         ->for(User::factory())
         ->create();
 
-    assertDatabaseHas('reminders', ['checkin_id' => $checkIn->id]);
+    assertDatabaseHas('reminders', ['check_in_id' => $checkIn->id]);
 });

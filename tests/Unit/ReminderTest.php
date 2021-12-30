@@ -22,7 +22,7 @@ it('can be created with a related CheckIn', function () {
         ->create();
 
     $reminder = new Reminder([
-        'checkin_id' => $checkIn->id
+        'check_in_id' => $checkIn->id
     ]);
 
     $reminder->save();
@@ -31,7 +31,7 @@ it('can be created with a related CheckIn', function () {
         'reminders',
         [
             'id' => $reminder->id,
-            'checkin_id' => $checkIn->id,
+            'check_in_id' => $checkIn->id,
             'interval' => 'monthly'
         ]
     );
@@ -45,7 +45,7 @@ it('creates a checkin date based on the chosen interval', function () {
         ->create();
 
     $reminder = new Reminder([
-        'checkin_id' => $checkIn->id
+        'check_in_id' => $checkIn->id
     ]);
 
     $reminder->save();
