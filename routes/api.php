@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CheckInController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -16,4 +17,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
+});
+
+
+
+Route::group(['middleware' => 'auth:sanctum', 'prefix' => 'checkin', 'as' => 'api.checkin.'], function () {
+    Route::post('create', [CheckInController::class, 'create'])->name('create');
 });
