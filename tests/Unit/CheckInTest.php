@@ -11,35 +11,35 @@ use function Pest\Faker\faker;
 use function Pest\Laravel\assertDatabaseHas;
 
 beforeEach(function () {
-    $this->checkin = CheckIn::factory()
+    $this->checkIn = CheckIn::factory()
         ->for(User::factory())
         ->create();
 });
 
 it('will not allow saving without a name and a user ID', function () {
     $this->expectException(QueryException::class);
-    $checkin = new CheckIn();
+    $checkIn = new CheckIn();
 
-    $checkin->save();
+    $checkIn->save();
 })->throws(QueryException::class);
 
 it('will save with a name and a user ID', function () {
     $user = User::factory()->create();
 
-    $checkin = new CheckIn([
+    $checkIn = new CheckIn([
         'name' => faker()->name,
         'user_id' => $user->id
     ]);
 
-    $checkin->save();
+    $checkIn->save();
 
-    assertDatabaseHas('check_ins', ['id' => $checkin->id, 'name' => $checkin->name]);
+    assertDatabaseHas('check_ins', ['id' => $checkIn->id, 'name' => $checkIn->name]);
 });
 
 it('can have an image', function () {
     $imageUrl = "https://via.placeholder.com/150";;
-    $this->checkin->image = $imageUrl;
-    $this->checkin->save();
+    $this->checkIn->image = $imageUrl;
+    $this->checkIn->save();
 
     assertDatabaseHas('check_ins', ['image' => $imageUrl]);
 });
@@ -47,8 +47,8 @@ it('can have an image', function () {
 it('can have a birthday', function () {
     $birthday = Carbon::create(1991, 10, 8);
 
-    $this->checkin->birthday = $birthday;
-    $this->checkin->save();
+    $this->checkIn->birthday = $birthday;
+    $this->checkIn->save();
 
     assertDatabaseHas('check_ins', ['birthday' => $birthday]);
 });
@@ -56,8 +56,16 @@ it('can have a birthday', function () {
 it('can have notes', function () {
     $notes = faker()->paragraph();
 
-    $this->checkin->notes = $notes;
-    $this->checkin->save();
+    $this->checkIn->notes = $notes;
+    $this->checkIn->save();
 
     assertDatabaseHas('check_ins', ['notes' => $notes]);
+});
+
+it('creates a checkin reminder when created', function () {
+    $checkIn = CheckIn::factory()
+        ->for(User::factory())
+        ->create();
+
+    assertDatabaseHas('reminders', ['checkin_id' => $checkIn->id]);
 });
