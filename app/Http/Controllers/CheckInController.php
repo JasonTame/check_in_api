@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Handlers\CheckInHandler;
+use App\Http\Requests\StoreCheckInRequest;
 
 class CheckInController extends Controller
 {
-    public function create(Request $request)
+    public function create(StoreCheckInRequest $request)
     {
         $checkIn = (new CheckInHandler)
             ->store($request);

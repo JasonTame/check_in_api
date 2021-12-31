@@ -3,11 +3,11 @@
 namespace App\Handlers;
 
 use App\Models\CheckIn;
-use Illuminate\Http\Request;
+use App\Http\Requests\StoreCheckInRequest;
 
 class CheckInHandler
 {
-    public function store(Request $request): CheckIn
+    public function store(StoreCheckInRequest $request): CheckIn
     {
         $name = $request->input('name');
         $userId = $request->input('user_id');
@@ -24,7 +24,7 @@ class CheckInHandler
         return $checkIn;
     }
 
-    private function setReminderInterval(Request $request, CheckIn $checkIn): void
+    private function setReminderInterval(StoreCheckInRequest $request, CheckIn $checkIn): void
     {
         $interval = $request->input('interval');
 

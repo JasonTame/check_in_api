@@ -1,16 +1,15 @@
 <?php
 
+use App\Handlers\CheckInHandler;
+use App\Http\Requests\StoreCheckInRequest;
 use App\Models\User;
 
 use function Pest\Faker\faker;
 use function Pest\Laravel\assertDatabaseHas;
 
-use App\Handlers\CheckInHandler;
-use Illuminate\Foundation\Http\FormRequest;
-
 beforeEach(function () {
     $this->user = User::factory()->create();
-    $this->request = new FormRequest([
+    $this->request = new StoreCheckInRequest([
         'name' => faker()->name,
         'user_id' => $this->user->id,
         'interval' => 'monthly'
