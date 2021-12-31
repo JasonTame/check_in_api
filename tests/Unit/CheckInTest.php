@@ -34,7 +34,13 @@ it('will save with a name and a user ID', function () {
 
     $checkIn->save();
 
-    assertDatabaseHas('check_ins', ['id' => $checkIn->id, 'name' => $checkIn->name]);
+    assertDatabaseHas(
+        'check_ins',
+        [
+            'id' => $checkIn->id,
+            'name' => $checkIn->name
+        ]
+    );
 });
 
 it('can have an image', function () {
