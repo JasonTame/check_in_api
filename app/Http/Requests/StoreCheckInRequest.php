@@ -26,7 +26,7 @@ class StoreCheckInRequest extends FormRequest
     {
         return [
             'name' => 'required|max:100',
-            'user_id' => 'required|exists:App\Models\User,id',
+            'user_id' => 'required|numeric|integer|exists:App\Models\User,id',
             'interval' => [
                 'string',
                 'required',
