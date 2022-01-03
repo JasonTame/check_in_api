@@ -14,8 +14,7 @@ class CheckInObserver
      * @return void
      */
     public function created(CheckIn $checkIn)
-    {
-        // Create a related reminder with default values
+    {        // Create a related reminder with default values
         $reminder = new Reminder([
             'check_in_id' => $checkIn->id
         ]);

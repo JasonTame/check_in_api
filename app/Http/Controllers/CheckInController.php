@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CheckIn;
+use Illuminate\Http\Request;
 use App\Handlers\CheckInHandler;
-use App\Http\Requests\StoreCheckInRequest;
 use Illuminate\Http\JsonResponse;
+use App\Http\Requests\StoreCheckInRequest;
 
 class CheckInController extends Controller
 {
@@ -13,6 +15,8 @@ class CheckInController extends Controller
      * Create CheckIn
      * 
      * Creates a new CheckIn
+     * 
+     * @group CheckIn
      *
      * @param StoreCheckInRequest $request
      * @return JsonResponse
@@ -27,6 +31,18 @@ class CheckInController extends Controller
                 [
                     'checkIn' => $checkIn,
                     'message' => 'Check In created'
+                ]
+            );
+    }
+
+    public function view(CheckIn $checkIn): JsonResponse
+    {
+
+
+        return response()
+            ->json(
+                [
+                    'checkIn' => $checkIn,
                 ]
             );
     }

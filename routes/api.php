@@ -1,8 +1,10 @@
 <?php
 
-use App\Http\Controllers\CheckInController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+
+use App\Http\Controllers\CheckInController;
+use App\Http\Controllers\AuthenticationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,12 +17,25 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+// Register new user
+Route::post(
+    '/create-account',
+    [AuthenticationController::class, 'createAccount']
+);
+
+// Login
+Route::post('/login', [AuthenticationController::class, 'login']);
+
+Route::group(['middleware' => ['auth:sanctum']], function () {
+    // Get profile data
+    Route::get('/profile', [AuthenticationController::class, 'getProfileData']);
+
+    // Logout
+    Route::post('/logout', [AuthenticationController::class, 'logout']);
 });
 
-
-
+// Check In routes
 Route::group(['middleware' => 'auth:sanctum', 'prefix' => 'checkin', 'as' => 'api.checkin.'], function () {
     Route::post('create', [CheckInController::class, 'create'])->name('create');
+    Route::get('view/{checkIn}', [CheckInController::class, 'view'])->name('view');
 });

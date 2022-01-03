@@ -7,6 +7,12 @@ use App\Http\Requests\StoreCheckInRequest;
 
 class CheckInHandler
 {
+    /**
+     * Creates a new CheckIn
+     *
+     * @param StoreCheckInRequest $request
+     * @return CheckIn
+     */
     public function store(StoreCheckInRequest $request): CheckIn
     {
         $name = $request->input('name');
@@ -24,6 +30,13 @@ class CheckInHandler
         return $checkIn;
     }
 
+    /**
+     * Sets the interval for the Reminder associated with the CheckIn
+     *
+     * @param StoreCheckInRequest $request
+     * @param CheckIn $checkIn
+     * @return void
+     */
     private function setReminderInterval(StoreCheckInRequest $request, CheckIn $checkIn): void
     {
         $interval = $request->input('interval');
