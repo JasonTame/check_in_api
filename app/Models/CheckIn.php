@@ -15,6 +15,15 @@ class CheckIn extends Model
     protected $guarded = ['id'];
 
     /**
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'user_id' => 'integer',
+    ];
+
+    /**
      * Get the reminder linked to this Check In
      *
      * @return HasOne

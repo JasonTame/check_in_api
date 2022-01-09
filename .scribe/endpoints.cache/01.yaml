@@ -23,36 +23,69 @@ endpoints:
         name: name
         description: 'Must not be greater than 100 characters.'
         required: true
-        example: kxyqvvqnsfcbrbsmmgriihqpjrmrypqvcsykfrjmgcivrowjovr
+        example: hojztrmwxlrtucelbzrixorqxqlqmirluzqqxujtoidxupfrwtgvmradxyzkawecehvonakrrnpfvgrhjkupluvendxgcroizwo
         type: string
         custom: []
       user_id:
         name: user_id
         description: ''
         required: true
-        example: 11
+        example: 10
         type: integer
         custom: []
       interval:
         name: interval
         description: 'Must be one of <code>weekly</code>, <code>bi-weekly</code>, <code>monthly</code>, <code>semi-annually</code>, or <code>annually</code>.'
         required: true
-        example: annually
+        example: monthly
         type: string
         custom: []
       birthday:
         name: birthday
         description: 'Must be a valid date.'
         required: false
-        example: '2022-01-01T13:15:08'
+        example: '2022-01-09T11:49:57'
         type: string
         custom: []
       notes:
         name: notes
         description: 'Must not be greater than 500 characters.'
         required: false
-        example: gjutrsxdqlnyundofvkpbtpbffahzpkuxbfevnbikowxnwtemvybhadzrjbtbfoknpwnhfnuvrbolcudpbpnieblnfogxaxwxmpacexoskhzztbzojxamsyvvbaupcwyfeaggjpehzqnytdbhzzrwbgrhcukrrxquvbcxobxfdmxduxopuibcjsywoxrqpdcksghjwnkxxoccqdngeyzvxmkoxnd
+        example: qidsdzrijbvohjlshitsjonufmvnloiecvwaekyiihuopoyqwajykrpcrbqndpritpyevpljtvsxruwiswjhnqxravboqweffupkawakfedkfperejzkbbqywfzqpxvfhsqxukhnwieddfoftkjgkbjtbsnhtiouiugorlwzfdofaedkvqylzllqasaaceoauifjwldhsgffwucyrgvpdqdyboulaoxzihkmmjcauetbqrpbgtghtmtltoryaxwbqflhduqhnphfuawkebevloulmnofqnanyeganlijeqytshaz
         type: string
         custom: []
     responses: []
+    responseFields: []
+  -
+    httpMethods:
+      - GET
+    uri: 'api/checkin/view/{checkIn}'
+    metadata:
+      title: 'View CheckIn'
+      description: 'View the details for a CheckIn'
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      checkIn:
+        name: checkIn
+        description: ''
+        required: true
+        example: 10
+        type: integer
+        custom: []
+    queryParameters: []
+    bodyParameters: []
+    responses:
+      -
+        status: 401
+        content: '{"message":"Unauthenticated."}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
     responseFields: []

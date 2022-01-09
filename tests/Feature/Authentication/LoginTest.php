@@ -1,8 +1,12 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
+
 use function Pest\Faker\faker;
 use function Pest\Laravel\json;
-use function Pest\Laravel\assertDatabaseHas;
+use function PHPUnit\Framework\assertFalse;
+use function PHPUnit\Framework\assertTrue;
+
 use Symfony\Component\HttpFoundation\Response;
 
 test('A user can login', function () {
@@ -17,6 +21,8 @@ test('A user can login', function () {
     // Create account
     json("POST", "/api/create-account", $data);
 
+    assertFalse(Auth::check());
+
     // Login
     json(
         "POST",
@@ -26,6 +32,8 @@ test('A user can login', function () {
             'password' => $data['password']
         ]
     )->assertStatus(Response::HTTP_OK);
+
+    assertTrue(Auth::check());
 
     // Login with incorrect password
     json(

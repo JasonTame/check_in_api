@@ -1,5 +1,8 @@
 <?php
 
+use App\Models\User;
+use function Pest\Faker\faker;
+
 /*
 |--------------------------------------------------------------------------
 | Test Case
@@ -11,11 +14,15 @@
 |
 */
 
+use function Pest\Laravel\json;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+
 
 uses(Tests\TestCase::class, RefreshDatabase::class)->in('Feature', 'Unit');
 
 uses()->group('auth')->in('Feature/Authentication');
+uses()->group('checkin')->in('Feature/CheckIn');
+
 /*
 |--------------------------------------------------------------------------
 | Expectations
@@ -42,7 +49,22 @@ expect()->extend('toBeOne', function () {
 |
 */
 
-function something()
+/**
+ * Create a new user and authenticate it with an API token
+ *
+ * @return User
+ */
+function createAndAuthenticateUser(): User
 {
-    // ..
+    // Create account
+    $user = User::create([
+        'name' => faker()->name,
+        'password' => 'password',
+        'email' => faker()->email
+    ]);
+
+    // Login
+    $user->createToken('API Token')->plainTextToken;
+
+    return $user;
 }

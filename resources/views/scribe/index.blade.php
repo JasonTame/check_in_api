@@ -96,6 +96,9 @@
                                                     <li class="tocify-item level-2" data-unique="checkin-POSTapi-checkin-create">
                         <a href="#checkin-POSTapi-checkin-create">Create CheckIn</a>
                     </li>
+                                    <li class="tocify-item level-2" data-unique="checkin-GETapi-checkin-view--checkIn-">
+                        <a href="#checkin-GETapi-checkin-view--checkIn-">View CheckIn</a>
+                    </li>
                                                     </ul>
                             </ul>
         
@@ -108,7 +111,7 @@
                             <li><a href="http://github.com/knuckleswtf/scribe">Documentation powered by Scribe ✍</a></li>
                     </ul>
         <ul class="toc-footer" id="last-updated">
-        <li>Last updated: January 1 2022</li>
+        <li>Last updated: January 9 2022</li>
     </ul>
 </div>
 
@@ -125,7 +128,7 @@ You can switch the language used with the tabs at the top right (or from the nav
 <pre><code class="language-yaml">http://checkin.test</code></pre>
 
         <h1 id="authenticating-requests">Authenticating requests</h1>
-<p>Authenticate requests to this API's endpoints by sending an <strong><code>Authorization</code></strong> header with the value <strong><code>"Bearer {YOUR_AUTH_KEY}"</code></strong>.</p>
+<p>This API is authenticated by sending an <strong><code>Authorization</code></strong> header with the value <strong><code>"Bearer {YOUR_AUTH_KEY}"</code></strong>.</p>
 <p>All authenticated endpoints are marked with a <code>requires authentication</code> badge in the documentation below.</p>
 <p>You can get a token for testing purposes by using the create account API call and copying the token, or by running php artisan generate:token.</p>
 
@@ -595,11 +598,11 @@ fetch(url, {
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"name\": \"kxyqvvqnsfcbrbsmmgriihqpjrmrypqvcsykfrjmgcivrowjovr\",
-    \"user_id\": 11,
-    \"interval\": \"annually\",
-    \"birthday\": \"2022-01-01T13:15:08\",
-    \"notes\": \"gjutrsxdqlnyundofvkpbtpbffahzpkuxbfevnbikowxnwtemvybhadzrjbtbfoknpwnhfnuvrbolcudpbpnieblnfogxaxwxmpacexoskhzztbzojxamsyvvbaupcwyfeaggjpehzqnytdbhzzrwbgrhcukrrxquvbcxobxfdmxduxopuibcjsywoxrqpdcksghjwnkxxoccqdngeyzvxmkoxnd\"
+    \"name\": \"hojztrmwxlrtucelbzrixorqxqlqmirluzqqxujtoidxupfrwtgvmradxyzkawecehvonakrrnpfvgrhjkupluvendxgcroizwo\",
+    \"user_id\": 10,
+    \"interval\": \"monthly\",
+    \"birthday\": \"2022-01-09T11:49:57\",
+    \"notes\": \"qidsdzrijbvohjlshitsjonufmvnloiecvwaekyiihuopoyqwajykrpcrbqndpritpyevpljtvsxruwiswjhnqxravboqweffupkawakfedkfperejzkbbqywfzqpxvfhsqxukhnwieddfoftkjgkbjtbsnhtiouiugorlwzfdofaedkvqylzllqasaaceoauifjwldhsgffwucyrgvpdqdyboulaoxzihkmmjcauetbqrpbgtghtmtltoryaxwbqflhduqhnphfuawkebevloulmnofqnanyeganlijeqytshaz\"
 }"
 </code></pre></div>
 
@@ -616,11 +619,11 @@ const headers = {
 };
 
 let body = {
-    "name": "kxyqvvqnsfcbrbsmmgriihqpjrmrypqvcsykfrjmgcivrowjovr",
-    "user_id": 11,
-    "interval": "annually",
-    "birthday": "2022-01-01T13:15:08",
-    "notes": "gjutrsxdqlnyundofvkpbtpbffahzpkuxbfevnbikowxnwtemvybhadzrjbtbfoknpwnhfnuvrbolcudpbpnieblnfogxaxwxmpacexoskhzztbzojxamsyvvbaupcwyfeaggjpehzqnytdbhzzrwbgrhcukrrxquvbcxobxfdmxduxopuibcjsywoxrqpdcksghjwnkxxoccqdngeyzvxmkoxnd"
+    "name": "hojztrmwxlrtucelbzrixorqxqlqmirluzqqxujtoidxupfrwtgvmradxyzkawecehvonakrrnpfvgrhjkupluvendxgcroizwo",
+    "user_id": 10,
+    "interval": "monthly",
+    "birthday": "2022-01-09T11:49:57",
+    "notes": "qidsdzrijbvohjlshitsjonufmvnloiecvwaekyiihuopoyqwajykrpcrbqndpritpyevpljtvsxruwiswjhnqxravboqweffupkawakfedkfperejzkbbqywfzqpxvfhsqxukhnwieddfoftkjgkbjtbsnhtiouiugorlwzfdofaedkvqylzllqasaaceoauifjwldhsgffwucyrgvpdqdyboulaoxzihkmmjcauetbqrpbgtghtmtltoryaxwbqflhduqhnphfuawkebevloulmnofqnanyeganlijeqytshaz"
 };
 
 fetch(url, {
@@ -686,7 +689,7 @@ fetch(url, {
                 <input type="text"
                name="name"
                data-endpoint="POSTapi-checkin-create"
-               value="kxyqvvqnsfcbrbsmmgriihqpjrmrypqvcsykfrjmgcivrowjovr"
+               value="hojztrmwxlrtucelbzrixorqxqlqmirluzqqxujtoidxupfrwtgvmradxyzkawecehvonakrrnpfvgrhjkupluvendxgcroizwo"
                data-component="body" hidden>
     <br>
 <p>Must not be greater than 100 characters.</p>
@@ -696,7 +699,7 @@ fetch(url, {
                 <input type="number"
                name="user_id"
                data-endpoint="POSTapi-checkin-create"
-               value="11"
+               value="10"
                data-component="body" hidden>
     <br>
 
@@ -706,7 +709,7 @@ fetch(url, {
                 <input type="text"
                name="interval"
                data-endpoint="POSTapi-checkin-create"
-               value="annually"
+               value="monthly"
                data-component="body" hidden>
     <br>
 <p>Must be one of <code>weekly</code>, <code>bi-weekly</code>, <code>monthly</code>, <code>semi-annually</code>, or <code>annually</code>.</p>
@@ -716,7 +719,7 @@ fetch(url, {
                 <input type="text"
                name="birthday"
                data-endpoint="POSTapi-checkin-create"
-               value="2022-01-01T13:15:08"
+               value="2022-01-09T11:49:57"
                data-component="body" hidden>
     <br>
 <p>Must be a valid date.</p>
@@ -726,12 +729,129 @@ fetch(url, {
                 <input type="text"
                name="notes"
                data-endpoint="POSTapi-checkin-create"
-               value="gjutrsxdqlnyundofvkpbtpbffahzpkuxbfevnbikowxnwtemvybhadzrjbtbfoknpwnhfnuvrbolcudpbpnieblnfogxaxwxmpacexoskhzztbzojxamsyvvbaupcwyfeaggjpehzqnytdbhzzrwbgrhcukrrxquvbcxobxfdmxduxopuibcjsywoxrqpdcksghjwnkxxoccqdngeyzvxmkoxnd"
+               value="qidsdzrijbvohjlshitsjonufmvnloiecvwaekyiihuopoyqwajykrpcrbqndpritpyevpljtvsxruwiswjhnqxravboqweffupkawakfedkfperejzkbbqywfzqpxvfhsqxukhnwieddfoftkjgkbjtbsnhtiouiugorlwzfdofaedkvqylzllqasaaceoauifjwldhsgffwucyrgvpdqdyboulaoxzihkmmjcauetbqrpbgtghtmtltoryaxwbqflhduqhnphfuawkebevloulmnofqnanyeganlijeqytshaz"
                data-component="body" hidden>
     <br>
 <p>Must not be greater than 500 characters.</p>
         </p>
         </form>
+
+            <h2 id="checkin-GETapi-checkin-view--checkIn-">View CheckIn</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>View the details for a CheckIn</p>
+
+<span id="example-requests-GETapi-checkin-view--checkIn-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http://checkin.test/api/checkin/view/10" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://checkin.test/api/checkin/view/10"
+);
+
+const headers = {
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-checkin-view--checkIn-">
+            <blockquote>
+            <p>Example response (401):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary>
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+access-control-allow-origin: *
+ </code></pre>
+        </details>         <pre>
+
+<code class="language-json">{
+    &quot;message&quot;: &quot;Unauthenticated.&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-checkin-view--checkIn-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-checkin-view--checkIn-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-checkin-view--checkIn-"></code></pre>
+</span>
+<span id="execution-error-GETapi-checkin-view--checkIn-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-checkin-view--checkIn-"></code></pre>
+</span>
+<form id="form-GETapi-checkin-view--checkIn-" data-method="GET"
+      data-path="api/checkin/view/{checkIn}"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Authorization":"Bearer {YOUR_AUTH_KEY}","Content-Type":"application\/json","Accept":"application\/json"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-checkin-view--checkIn-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-checkin-view--checkIn-"
+                    onclick="tryItOut('GETapi-checkin-view--checkIn-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-checkin-view--checkIn-"
+                    onclick="cancelTryOut('GETapi-checkin-view--checkIn-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-checkin-view--checkIn-" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/checkin/view/{checkIn}</code></b>
+        </p>
+                <p>
+            <label id="auth-GETapi-checkin-view--checkIn-" hidden>Authorization header:
+                <b><code>Bearer </code></b><input type="text"
+                                                                name="Authorization"
+                                                                data-prefix="Bearer "
+                                                                data-endpoint="GETapi-checkin-view--checkIn-"
+                                                                data-component="header"></label>
+        </p>
+                <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <p>
+                <b><code>checkIn</code></b>&nbsp;&nbsp;<small>integer</small>  &nbsp;
+                <input type="number"
+               name="checkIn"
+               data-endpoint="GETapi-checkin-view--checkIn-"
+               value="10"
+               data-component="url" hidden>
+    <br>
+
+            </p>
+                    </form>
 
     
 

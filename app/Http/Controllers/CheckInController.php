@@ -35,15 +35,31 @@ class CheckInController extends Controller
             );
     }
 
-    public function view(CheckIn $checkIn): JsonResponse
+    /**
+     * View CheckIn
+     * 
+     * View the details for a CheckIn
+     * 
+     * @group CheckIn
+     *      
+     * @param CheckIn $checkIn The ID of the CheckIn
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function view(CheckIn $checkIn, Request $request): JsonResponse
     {
-
+        if ($request->user()->cannot('view', $checkIn)) {
+            return response()->json(
+                [
+                    'message' => "You are not authorized to perform this action"
+                ],
+                403
+            );
+        }
 
         return response()
             ->json(
-                [
-                    'checkIn' => $checkIn,
-                ]
+                $checkIn
             );
     }
 }
