@@ -35,7 +35,10 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 });
 
 // Check In routes
-Route::group(['middleware' => 'auth:sanctum', 'prefix' => 'checkin', 'as' => 'api.checkin.'], function () {
+Route::group(['middleware' => 'auth:sanctum', 'prefix' => 'checkins', 'as' => 'api.checkins.'], function () {
     Route::post('create', [CheckInController::class, 'create'])->name('create');
-    Route::get('view/{checkIn}', [CheckInController::class, 'view'])->name('view');
+    Route::get('', [CheckInController::class, 'index'])->name('index');
+    Route::get('{checkIn}', [CheckInController::class, 'view'])->name('view');
+    Route::put('{checkIn}', [CheckInController::class, 'update'])->name('update');
+    Route::delete('{checkIn}', [CheckInController::class, 'delete'])->name('delete');
 });

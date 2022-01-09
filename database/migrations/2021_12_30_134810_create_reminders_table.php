@@ -20,7 +20,11 @@ class CreateRemindersTable extends Migration
             $table->dateTime('checkin_date')->nullable();
             $table->timestamps();
 
-            $table->foreign('check_in_id')->references('id')->on('check_ins');
+            $table
+                ->foreign('check_in_id')
+                ->references('id')
+                ->on('check_ins')
+                ->onDelete('cascade');
         });
     }
 

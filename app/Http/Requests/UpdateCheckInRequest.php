@@ -2,10 +2,11 @@
 
 namespace App\Http\Requests;
 
+use App\Models\CheckIn;
 use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreCheckInRequest extends FormRequest
+class UpdateCheckInRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -14,22 +15,24 @@ class StoreCheckInRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+
+        $checkIn = CheckIn::where('id', $this->route('checkIn')->id)
+            ->first();
+
+        return $this->user()->can('update', $checkIn);
     }
 
     /**
-     * Get the validation rules that apply to the request
+     * Get the validation rules that apply to the request.
      *
      * @return array
      */
     public function rules()
     {
         return [
-            'name' => 'required|max:100',
-            'user_id' => 'required|numeric|integer|exists:App\Models\User,id',
+            'name' => 'max:100',
             'interval' => [
                 'string',
-                'required',
                 Rule::in(
                     [
                         'weekly',
@@ -40,8 +43,8 @@ class StoreCheckInRequest extends FormRequest
                     ]
                 )
             ],
-            'birthday' => 'nullable|date',
-            'notes' => 'nullable|string|max:500'
+            'birthday' => 'date',
+            'notes' => 'string|max:500'
         ];
     }
 }

@@ -20,7 +20,7 @@ test('A user can create a check in', function () {
         'interval' => 'weekly',
     ];
 
-    $request = json('POST', '/api/checkin/create', $data)
+    $request = json('POST', '/api/checkins/create', $data)
         ->assertStatus(Response::HTTP_OK);
 
     assertDatabaseHas(
@@ -44,7 +44,7 @@ test('A valid name must be sent with the request', function () {
         'interval' => 'weekly',
     ];
 
-    json('POST', '/api/checkin/create', $data)
+    json('POST', '/api/checkins/create', $data)
         ->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY);
 
     // Name is too long
@@ -54,7 +54,7 @@ test('A valid name must be sent with the request', function () {
         'interval' => 'weekly',
     ];
 
-    json('POST', '/api/checkin/create', $data)
+    json('POST', '/api/checkins/create', $data)
         ->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY);
 });
 
@@ -65,7 +65,7 @@ test('A valid user ID must be sent with the request', function () {
         'interval' => 'weekly',
     ];
 
-    json('POST', '/api/checkin/create', $data)
+    json('POST', '/api/checkins/create', $data)
         ->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY);
 
     // User with given ID must exist
@@ -75,7 +75,7 @@ test('A valid user ID must be sent with the request', function () {
         'interval' => 'weekly',
     ];
 
-    json('POST', '/api/checkin/create', $data)
+    json('POST', '/api/checkins/create', $data)
         ->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY);
 });
 
@@ -86,7 +86,7 @@ test('A valid interval must be sent with the request', function () {
         'user_id' => $this->user->id,
     ];
 
-    json('POST', '/api/checkin/create', $data)
+    json('POST', '/api/checkins/create', $data)
         ->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY);
 
     // Interval value is not allowed
@@ -96,7 +96,7 @@ test('A valid interval must be sent with the request', function () {
         'interval' => 'random value',
     ];
 
-    json('POST', '/api/checkin/create', $data)
+    json('POST', '/api/checkins/create', $data)
         ->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY);
 });
 
@@ -109,7 +109,7 @@ test('Birthday data must be valid if sent with the request', function () {
         'birthday' => 'today'
     ];
 
-    json('POST', '/api/checkin/create', $data)
+    json('POST', '/api/checkins/create', $data)
         ->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY);
 
     // Birthday as a valid date
@@ -120,7 +120,7 @@ test('Birthday data must be valid if sent with the request', function () {
         'birthday' => Carbon::now()
     ];
 
-    json('POST', '/api/checkin/create', $data)
+    json('POST', '/api/checkins/create', $data)
         ->assertStatus(Response::HTTP_OK);
 });
 
@@ -133,7 +133,7 @@ test('Notes data must be valid if sent with the request', function () {
         'notes' => faker()->paragraph(20)
     ];
 
-    json('POST', '/api/checkin/create', $data)
+    json('POST', '/api/checkins/create', $data)
         ->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY);
 
     // Valid string
@@ -144,6 +144,6 @@ test('Notes data must be valid if sent with the request', function () {
         'notes' => faker()->paragraph()
     ];
 
-    json('POST', '/api/checkin/create', $data)
+    json('POST', '/api/checkins/create', $data)
         ->assertStatus(Response::HTTP_OK);
 });

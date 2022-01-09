@@ -13,11 +13,11 @@ test('Only the owner of the CheckIn can view it', function () {
         ->create();
 
     $this->actingAs($user2)
-        ->json("GET", "/api/checkin/view/$checkIn->id")
+        ->json("GET", "/api/checkins/$checkIn->id")
         ->assertStatus(Response::HTTP_FORBIDDEN);
 
     $this->actingAs($user)
-        ->json("GET", "/api/checkin/view/$checkIn->id")
+        ->json("GET", "/api/checkins/$checkIn->id")
         ->assertStatus(Response::HTTP_OK);
 });
 
@@ -29,7 +29,7 @@ test('A user can view the details of a CheckIn', function () {
         ->create();
 
     $this->actingAs($user)
-        ->json("GET", "/api/checkin/view/$checkIn->id")
+        ->json("GET", "/api/checkins/$checkIn->id")
         ->assertStatus(Response::HTTP_OK)
         ->assertJson(
             fn (AssertableJson $json) =>
@@ -37,5 +37,29 @@ test('A user can view the details of a CheckIn', function () {
                 ->where('name', $checkIn->name)
                 ->where('user_id', $checkIn->user_id)
                 ->etc()
+        );
+});
+
+test('A user can view all of their CheckIns', function () {
+    $user = createAndAuthenticateUser();
+
+    CheckIn::factory()
+        ->count(5)
+        ->for($user)
+        ->create();
+
+    $this->actingAs($user)
+        ->json("GET", "/api/checkins")
+        ->assertStatus(Response::HTTP_OK)
+        ->assertJson(
+            fn (AssertableJson $json) =>
+            $json
+                ->has(5)
+                ->each(
+                    fn ($json) =>
+                    $json
+                        ->where('user_id', $user->id)
+                        ->etc()
+                )
         );
 });

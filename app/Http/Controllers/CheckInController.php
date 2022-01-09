@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Handlers\CheckInHandler;
 use Illuminate\Http\JsonResponse;
 use App\Http\Requests\StoreCheckInRequest;
+use App\Http\Requests\UpdateCheckInRequest;
 
 class CheckInController extends Controller
 {
@@ -17,7 +18,7 @@ class CheckInController extends Controller
      * Creates a new CheckIn
      * 
      * @group CheckIn
-     *
+     * 
      * @param StoreCheckInRequest $request
      * @return JsonResponse
      */
@@ -32,6 +33,26 @@ class CheckInController extends Controller
                     'checkIn' => $checkIn,
                     'message' => 'Check In created'
                 ]
+            );
+    }
+
+    /**
+     * View all CheckIns
+     * 
+     * Returns a list of all CheckIns that belong to the user
+     * 
+     * @group CheckIn
+     *
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function index(Request $request): JsonResponse
+    {
+        $checkIns = $request->user()->checkIns;
+
+        return response()
+            ->json(
+                $checkIns
             );
     }
 
@@ -60,6 +81,59 @@ class CheckInController extends Controller
         return response()
             ->json(
                 $checkIn
+            );
+    }
+
+    /**
+     * Update a Check In
+     * 
+     * Update the details of a CheckIn belonging to the authenticated user
+     * 
+     * @group CheckIn
+     *
+     * @param CheckIn $checkIn
+     * @param UpdateCheckInRequest $request
+     * @return JsonResponse
+     */
+    public function update(CheckIn $checkIn, UpdateCheckInRequest $request): JsonResponse
+    {
+        $validated = $request->validated();
+
+        $checkIn->update($validated);
+
+        return response()
+            ->json(
+                $checkIn
+            );
+    }
+
+    /**
+     * Delete CheckIn
+     * 
+     * Deletes a CheckIn belonging to the user
+     * 
+     * @group CheckIn
+     *
+     * @param CheckIn $checkIn
+     * @param Request $request
+     * @return void
+     */
+    public function delete(CheckIn $checkIn, Request $request)
+    {
+        if ($request->user()->cannot('delete', $checkIn)) {
+            return response()->json(
+                [
+                    'message' => "You are not authorized to perform this action"
+                ],
+                403
+            );
+        }
+
+        $checkIn->delete();
+
+        return response()
+            ->json(
+                ['message' => 'CheckIn deleted']
             );
     }
 }
