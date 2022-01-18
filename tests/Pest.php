@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\CheckIn;
 use App\Models\User;
 use function Pest\Faker\faker;
 

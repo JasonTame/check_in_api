@@ -42,3 +42,7 @@ Route::group(['middleware' => 'auth:sanctum', 'prefix' => 'checkins', 'as' => 'a
     Route::put('{checkIn}', [CheckInController::class, 'update'])->name('update');
     Route::delete('{checkIn}', [CheckInController::class, 'delete'])->name('delete');
 });
+
+// Reminder routes
+Route::group(['middleware' => 'auth:sanctum', 'prefix' => 'reminders', 'as' => 'api.reminders'], function () {
+});
